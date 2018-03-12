@@ -1,0 +1,48 @@
+[
+  {
+    "op": "core/column-removal",
+    "description": "Excluir Coluna [Column 1]",
+    "columnName": "Column 1",
+    "ignoreError": false
+  },
+  {
+    "op": "core/fill-down",
+    "description": "Preencher Abaixo [Mobile subscriptions] (#### Linhas)",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "columnName": "Mobile subscriptions"
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Remover Caracteres depois de /\\.\\d+/ [Mobile subscriptions] (#### Linhas)",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "columnName": "Mobile subscriptions",
+    "expression": "grel:trim(partition(value, /\\.\\d+/)[0] + partition(value, /\\.\\d+/)[1])",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/row-removal",
+    "description": "Excluir Linha(s) em que a Célula Contém 'N/A' [% of population of 3g/4G users] (#### Linhas)",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": [
+        {
+          "mode": "text",
+          "caseSensitive": true,
+          "query": "N/A",
+          "name": "% of population of 3g/4G users",
+          "type": "text",
+          "columnName": "% of population of 3g/4G users"
+        }
+      ]
+    },
+    "invert": false
+  }
+]

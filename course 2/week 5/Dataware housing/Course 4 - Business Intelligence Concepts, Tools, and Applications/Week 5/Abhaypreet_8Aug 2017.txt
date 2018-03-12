@@ -1,0 +1,45 @@
+[
+  {
+    "op": "core/column-split",
+    "description": "Split On /-/ [Camis - Location ID] (#### Rows)",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "columnName": "Camis - Location ID",
+    "guessCellType": true,
+    "removeOriginalColumn": true,
+    "mode": "separator",
+    "separator": "-",
+    "regex": true,
+    "maxColumns": 2,
+    "separatorSolutionInt": 0
+  },
+  {
+    "op": "core/fill-down",
+    "description": "Fill Down [Country] (#### Rows)",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "columnName": "Country"
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Edit Cell [State] (#### Rows)",
+    "engineConfig": null,
+    "columnName": "State",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "new york",
+          "New York"
+        ],
+        "to": "New York"
+      }
+    ]
+  }
+]
